@@ -26,8 +26,10 @@ char f2b(float a){
 	return aa.r.sgn<<7 | (aa.r.exp-112)<<2 | aa.r.man>>21;
 }
 
-void mult(char a, char b, char* c, char en){
+void mult(char a, char b, char* c,char* a_out, char* b_out, char en){
 	static char arr[10]={0};
+	static char aa[10]={0};
+	static char bb[10]={0};
 	static int cnt=0;
 	static int rd=0;
 	arr[cnt] = f2b(b2f(a)*b2f(b));
@@ -35,6 +37,8 @@ void mult(char a, char b, char* c, char en){
 	cnt=cnt%10;
 	if(en){
 		*c=arr[rd];
+		*a_out=aa[rd];
+		*b_out=bb[rd];
 		rd++;
 		rd=rd%10;
 	}
@@ -42,10 +46,10 @@ void mult(char a, char b, char* c, char en){
 
 int main()
 {
-	char ans;
+	char ans,aa,bb;
 	for (int i = 0; i < 10; ++i)
 	{
-		mult(61,60+i,&ans,i%2);
+		mult(61,60+i,&ans,&aa,&bb,i%2);
 		printf("%d\n", ans);
 	}
 	
