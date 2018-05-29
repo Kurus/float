@@ -32,6 +32,8 @@ void mult(char a, char b, char* c,char* a_out, char* b_out, char en){
 	static char bb[10]={0};
 	static int cnt=0;
 	static int rd=0;
+	aa[cnt]=a;
+	bb[cnt]=b;
 	arr[cnt] = f2b(b2f(a)*b2f(b));
 	cnt++;
 	cnt=cnt%10;
@@ -50,7 +52,7 @@ int main()
 	for (int i = 0; i < 10; ++i)
 	{
 		mult(61,60+i,&ans,&aa,&bb,i%2);
-		printf("%d\n", ans);
+		printf("%d %d %d \n", ans,aa,bb);
 	}
 	
 	return 0;
