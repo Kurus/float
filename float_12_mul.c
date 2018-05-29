@@ -29,7 +29,7 @@ char f2b(float a){
 	union float32 aa;
 	aa.f=a;
 	char x = (aa.r.exp-112);
-	if(x<0)x=0;
+	if(x<0)return 0;
 	if(x>31)x=31;
 	return aa.r.sgn<<7 | x<<2 | aa.r.man>>21;
 }
@@ -57,8 +57,8 @@ void mult(char a, char b, char* c,char* a_out, char* b_out, char en){
 int main()
 {
 	char ans,aa,bb;
-		mult(0,0,&ans,&aa,&bb,1);
-	printf("%d %d %d \n", ans,aa,bb);
+		mult(36,129,&ans,&aa,&bb,1);
+	printf("%d %x %x \n", ans,aa,bb);
 	// for (int i = 0; i < 10; ++i)
 	// {
 	// 	mult(0,0,&ans,&aa,&bb,i%2);
