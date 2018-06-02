@@ -36,7 +36,7 @@ char f2b(float a){
 	aa.f=a;
 	// printf("%x\n", aa.r.exp);
 	char x = (aa.r.exp-112);
-	if(x<0)x= 0;
+	if(x<0){x= 0; aa.r.sgn=0; aa.r.man=0;}
 	if(x>31)x=31;
 	return aa.r.sgn<<7 | x<<2 | aa.r.man>>21;
 }
@@ -65,7 +65,7 @@ int main()
 {
 	char ans,aa,bb;
 	// printf("%d\n",f2b(b2f(13)) );
-		mult(129,200,&ans,&aa,&bb,1);
+		mult(129,36,&ans,&aa,&bb,1);
 	printf("%d %x %x \n", ans,aa,bb);
 	// for (int i = 0; i < 10; ++i)
 	// {
