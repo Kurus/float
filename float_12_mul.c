@@ -17,7 +17,7 @@ float b2f(char a){
 	aa.r.sgn=(a&0x80)>>7;
 	aa.r.man=(a&0x3)<<21;
 	if(((a&0x7c)>>2) == 0){
-		if(a&0x3==0){
+		if((a&0x3)==0){
 			aa.r.exp=0;
 		}
 		else{
@@ -27,14 +27,14 @@ float b2f(char a){
 	else{
 		aa.r.exp=(((a&0x7c)>>2)+112);
 	}
-	// printf("%e\n", aa.f);
+	printf("%e\n", aa.f);
 	return aa.f;
 }
 
 char f2b(float a){
 	union float32 aa;
 	aa.f=a;
-	// printf("%x\n", aa.r.exp);
+	// printf("%f\n", aa.f);
 	char x = (aa.r.exp-112);
 	if(x<0){x= 0; aa.r.sgn=0; aa.r.man=0;}
 	if(x>31)x=31;
@@ -65,7 +65,7 @@ int main()
 {
 	char ans,aa,bb;
 	// printf("%d\n",f2b(b2f(13)) );
-		mult(129,36,&ans,&aa,&bb,1);
+		mult(208,0,&ans,&aa,&bb,1);
 	printf("%d %x %x \n", ans,aa,bb);
 	// for (int i = 0; i < 10; ++i)
 	// {
