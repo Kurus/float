@@ -55,7 +55,8 @@ char d2b(double a){
 	union float64 aa;
 	aa.f=a;
 	printf("%f\n", aa.f);
-	char x = (aa.r.exp-1008);
+	int x = (aa.r.exp-1008);
+	printf("%lx\n", x);
 	if(x<0){x= 0; aa.r.sgn=0; aa.r.man=0;}
 	if(x>31)x=31;
 	return aa.r.sgn<<7 | x<<2 | aa.r.man>>50;
@@ -86,7 +87,7 @@ int main()
 {
 	char ans,aa,bb;
 	// printf("%d\n",f2b(b2f(13)) );
-		add(120,137,&ans,&aa,&bb,1);
+		add(0,0,&ans,&aa,&bb,1);
 	printf("%d\n", ans);
 	// for (int i = 0; i < 10; ++i)
 	// {
