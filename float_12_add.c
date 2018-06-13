@@ -12,8 +12,18 @@ union float32 {
     float f;
 };
 
+union float64 {
+    struct {
+        unsigned long man : 52;
+        unsigned int exp : 11;
+        unsigned int sgn : 1;
+    } r;
+    double f;
+};
+
 float b2f(char a){
 	union float32 aa;
+	printf("%d ->",a );
 	aa.r.sgn=(a&0x80)>>7;
 	aa.r.man=(a&0x3)<<21;
 	if(((a&0x7c)>>2) == 0){
@@ -34,13 +44,24 @@ float b2f(char a){
 char f2b(float a){
 	union float32 aa;
 	aa.f=a;
-	// printf("%f\n", aa.f);
+	printf("%f\n", aa.f);
 	char x = (aa.r.exp-112);
 	if(x<0){x= 0; aa.r.sgn=0; aa.r.man=0;}
 	if(x>31)x=31;
 	return aa.r.sgn<<7 | x<<2 | aa.r.man>>21;
 }
 
+char d2b(double a){
+	union float64 aa;
+	aa.f=a;
+	printf("%f\n", aa.f);
+	char x = (aa.r.exp-1008);
+	if(x<0){x= 0; aa.r.sgn=0; aa.r.man=0;}
+	if(x>31)x=31;
+	return aa.r.sgn<<7 | x<<2 | aa.r.man>>50;
+}
+double f2d(float a){return (double)a;}
+	
 void add(char a, char b, char* c,char* a_out, char* b_out, char en){
 	static char arr[10]={0};
 	static char aa[10]={0};
@@ -49,7 +70,7 @@ void add(char a, char b, char* c,char* a_out, char* b_out, char en){
 	static int rd=0;
 	aa[cnt]=a;
 	bb[cnt]=b;
-	arr[cnt] = f2b(b2f(a)+b2f(b));
+	arr[cnt] = d2b(f2d(b2f(a))+f2d(b2f(b)));
 	cnt++;
 	cnt=cnt%10;
 	if(en){
@@ -65,8 +86,8 @@ int main()
 {
 	char ans,aa,bb;
 	// printf("%d\n",f2b(b2f(13)) );
-		add(208,0,&ans,&aa,&bb,1);
-	printf("%d %x %x \n", ans,aa,bb);
+		add(120,137,&ans,&aa,&bb,1);
+	printf("%d\n", ans);
 	// for (int i = 0; i < 10; ++i)
 	// {
 	// 	add(0,0,&ans,&aa,&bb,i%2);
