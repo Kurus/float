@@ -14,7 +14,7 @@ union float32 {
 
 union float64 {
     struct {
-        unsigned long man : 52;
+        unsigned long long man : 52;
         unsigned int exp : 11;
         unsigned int sgn : 1;
     } r;
