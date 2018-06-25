@@ -84,8 +84,8 @@ double b2d(long long x){
     return  *(double *)(&a);
 }
 
-int d2b2(double a){
-	// printf("== %f\n", a);
+unsigned int d2b2(double a){
+	printf("== %f\n", a);
     long long x = *(long long *)(&a);
     long long e = ((x&0x7FF0000000000000)>>52) - 1008;
     long long man = x&0x000FC00000000000;
@@ -99,7 +99,7 @@ int d2b2(double a){
         e = 31;
     }
 
-    return sgn>>52 | e<<6 | man>> 46;
+    return (sgn>>52 | e<<6 | man>> 46)& 0xfff;
 }
 
 double b2d2(long long x){
@@ -113,7 +113,7 @@ double b2d2(long long x){
         }
     }
     long long a= (((x&0x800)<<52) | (ee)<<52 | (x&0x3f)<<46);
-    // printf(">> %f", *(double *)(&a));
+    printf(">> %f", *(double *)(&a));
     return  *(double *)(&a);
 }
 
@@ -205,17 +205,18 @@ int main()
 	// int x = 0x4a;
 	// printf("%f\n",(b2d(x)));
 	// printf("%f\n",(b2d2(x<<4)));
+printf("%d",d2b2(b2d2(1316)+b2d2(3713)));
 
-	for (int i = 0; i < 10; ++i)
-	{
-		aa = rand()%256;
-		bb = rand()%256;
-		// printf("%x %x %x\n", aa, aa>>4, aa<<4);
-		add(aa,bb,&ans,&t,&t,1);
-		// printf("%d %d %d \n", ans,aa,bb);
-		add2(aa>>4,aa<<4,bb>>4,(bb<<4)&0xff,&ans2,&ans,&t,&t,&t,&t,1);
-		// printf("%d %d %d \n", (ans2<<4)|(ans>>4),aa,bb);
-	}
+	// for (int i = 0; i < 10; ++i)
+	// {
+	// 	aa = rand()%256;
+	// 	bb = rand()%256;
+	// 	// printf("%x %x %x\n", aa, aa>>4, aa<<4);
+	// 	add(aa,bb,&ans,&t,&t,1);
+	// 	// printf("%d %d %d \n", ans,aa,bb);
+	// 	add2(aa>>4,aa<<4,bb>>4,(bb<<4)&0xff,&ans2,&ans,&t,&t,&t,&t,1);
+	// 	// printf("%d %d %d \n", (ans2<<4)|(ans>>4),aa,bb);
+	// }
 	
 	return 0;
 }
