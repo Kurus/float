@@ -188,9 +188,12 @@ void add2(unsigned char a,unsigned char a0, unsigned char b,unsigned char b0, un
 	cnt++;
 	cnt=cnt%10;
 	if(en){
-		*c=arr[rd];
-		*a_out=aa[rd];
-		*b_out=bb[rd];
+		*c=(arr[rd]&0xff00)>>8;
+		*c0=arr[rd]&0xff;
+		*a_out=(aa[rd]&0xff00)>>8;
+		*a_out0=(aa[rd]&0xff);
+		*b_out=(bb[rd]&0xff00)>>8;
+		*b_out0=(bb[rd]&0xff);
 		rd++;
 		rd=rd%10;
 	}
