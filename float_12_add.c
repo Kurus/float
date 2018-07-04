@@ -88,9 +88,11 @@ double b2d(long long x){
 unsigned int d2b2(double a){
 	printf("== %f\n", a);
     long long x = *(long long *)(&a);
-    if ((x&0x7FFFE00000000000)!=0x7FFFE00000000000){
-        x = x+0x0000200000000000; // round off
+    printf("%llx\n",x );
+    if (x >0x40FFC00000000000){
+        x = 0x40FFC00000000000;
     }
+    x = x+0x0000200000000000; // round off
     long long e = ((x&0x7FF0000000000000)>>52) - 1008;
     long long man = x&0x000FC00000000000;
     long long sgn = x&0x8000000000000000;
@@ -102,7 +104,7 @@ unsigned int d2b2(double a){
     if (e>31){
         e = 31;
     }
-
+    printf("%llx\n",x );
     return (sgn>>52 | e<<6 | man>> 46)& 0xfff;
 }
 
@@ -117,8 +119,8 @@ double b2d2(long long x){
         }
     }
     long long a= (((x&0x800)<<52) | (ee)<<52 | (x&0x3f)<<46);
-    printf(">> %f", *(double *)(&a));
-    // printf("%llx\n", a);
+    printf(">> %f\n", *(double *)(&a));
+    printf("%llx\n", a);
     return  *(double *)(&a);
 }
 
@@ -210,9 +212,9 @@ int main()
 	// int x = 0x4a;
 	// printf("%f\n",(b2d(x)));
 	// printf("%f\n",(b2d2(x<<4)));
-    unsigned int a = d2b2(b2d2(0x524)+b2d2(0xe81));
+    unsigned int a = d2b2(b2d2(0x66f)+b2d2(0x7fe));
     printf("%x\n", a);
-    // printf("%f\n",b2d2(0xe7f));
+    printf("%f\n",b2d2(0x7ff));
 
 	// for (int i = 0; i < 10; ++i)
 	// {
