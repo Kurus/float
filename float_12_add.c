@@ -51,6 +51,7 @@ union float64 {
 // 	return aa.r.sgn<<7 | x<<2 | aa.r.man>>21;
 // }
 
+////////////////////single byte
 unsigned char d2b(double a){
 	// printf("= %f\n", a);
     long long x = *(long long *)(&a);
@@ -83,10 +84,11 @@ double b2d(long long x){
     // printf("> %f ", *(double *)(&a));
     return  *(double *)(&a);
 }
-
+///////////////////// two byte 12 bit
 unsigned int d2b2(double a){
 	printf("== %f\n", a);
     long long x = *(long long *)(&a);
+    x = x+0x0000200000000000; // round off
     long long e = ((x&0x7FF0000000000000)>>52) - 1008;
     long long man = x&0x000FC00000000000;
     long long sgn = x&0x8000000000000000;
@@ -113,6 +115,7 @@ double b2d2(long long x){
         }
     }
     long long a= (((x&0x800)<<52) | (ee)<<52 | (x&0x3f)<<46);
+    a = a+0x0000200000000000;
     printf(">> %f", *(double *)(&a));
     return  *(double *)(&a);
 }
@@ -205,7 +208,7 @@ int main()
 	// int x = 0x4a;
 	// printf("%f\n",(b2d(x)));
 	// printf("%f\n",(b2d2(x<<4)));
-printf("%d",d2b2(b2d2(1316)+b2d2(3713)));
+printf("%x",d2b2(b2d2(0x140)*b2d2(0xa80)));
 
 	// for (int i = 0; i < 10; ++i)
 	// {
