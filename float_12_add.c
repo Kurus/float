@@ -88,7 +88,9 @@ double b2d(long long x){
 unsigned int d2b2(double a){
 	printf("== %f\n", a);
     long long x = *(long long *)(&a);
-    x = x+0x0000200000000000; // round off
+    if ((x&0x7FFFE00000000000)!=0x7FFFE00000000000){
+        x = x+0x0000200000000000; // round off
+    }
     long long e = ((x&0x7FF0000000000000)>>52) - 1008;
     long long man = x&0x000FC00000000000;
     long long sgn = x&0x8000000000000000;
@@ -115,8 +117,9 @@ double b2d2(long long x){
         }
     }
     long long a= (((x&0x800)<<52) | (ee)<<52 | (x&0x3f)<<46);
-    a = a+0x0000200000000000;
-    printf(">> %f", *(double *)(&a));
+    if ((a&0x7FFFE00000000000)!=0x7FFFE00000000000){
+        a = a+0x0000200000000000; // round off
+    }    printf(">> %f", *(double *)(&a));
     return  *(double *)(&a);
 }
 
