@@ -117,9 +117,8 @@ double b2d2(long long x){
         }
     }
     long long a= (((x&0x800)<<52) | (ee)<<52 | (x&0x3f)<<46);
-    if ((a&0x7FFFE00000000000)!=0x7FFFE00000000000){
-        a = a+0x0000200000000000; // round off
-    }    printf(">> %f", *(double *)(&a));
+    printf(">> %f", *(double *)(&a));
+    // printf("%llx\n", a);
     return  *(double *)(&a);
 }
 
@@ -211,7 +210,9 @@ int main()
 	// int x = 0x4a;
 	// printf("%f\n",(b2d(x)));
 	// printf("%f\n",(b2d2(x<<4)));
-printf("%x",d2b2(b2d2(0x140)*b2d2(0xa80)));
+    unsigned int a = d2b2(b2d2(0x524)+b2d2(0xe81));
+    printf("%x\n", a);
+    // printf("%f\n",b2d2(0xe7f));
 
 	// for (int i = 0; i < 10; ++i)
 	// {
