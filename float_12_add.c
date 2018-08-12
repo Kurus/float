@@ -210,10 +210,10 @@ int main()
 	// int x = 0x4a;
 	// printf("%f\n",(b2d(x)));
 	// printf("%f\n",(b2d2(x<<4)));
-    unsigned int a = d2b2(b2d2(0xfad)+b2d2(0xff9));
-    printf("%x\n", a);
-    printf("%f\n",b2d2(0x7ff));
-    printf("%llx\n",d2b2(-1.10592E5));
+    // unsigned int a = d2b2(b2d2(0x609)*b2d2(0x663));
+    // printf("%x\n", a);
+    printf("%f\n",b2d2(0x580));
+    // printf("%llx\n",d2b2(-1.10592E5));
 
 	// for (int i = 0; i < 10; ++i)
 	// {

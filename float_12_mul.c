@@ -11,7 +11,7 @@ union float32 {
     } r;
     float f;
 };
-
+// single byte
 float b2f(char a){
 	union float32 aa;
 	aa.r.sgn=(a&0x80)>>7;
