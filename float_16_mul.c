@@ -74,6 +74,36 @@ void add(unsigned char a,unsigned char a0, unsigned char b,unsigned char b0, uns
 	}
 }
 
+//12 bit input
+void mul(unsigned char a,unsigned char a0, unsigned char b,unsigned char b0, unsigned char* c, unsigned char* c0, unsigned char* a_out, unsigned char* a_out0, unsigned char* b_out, unsigned char* b_out0, unsigned char en){
+	// a=a&0xff;a0= a0&0xff;
+	// b=b&0xff;b0= b0&0xff;
+	// printf("add2 %x %x %x %x \n",a, a0,b, b0 );
+	static int arr[10]={0};
+	static int aa[10]={0};
+	static int bb[10]={0};
+	static int cnt=0;
+	static int rd=0;
+	int a2= (a<<8)|a0;
+	int b2= ((int)(b<<8)|b0);
+	aa[cnt]= a2;
+	bb[cnt]= b2;
+	// printf("a2,b2 %x %x\n", a2,b2);
+	arr[cnt] = d2b2(b2d2(a2)*b2d2(b2));
+	cnt++;
+	cnt=cnt%10;
+	if(en){
+		*c=(arr[rd]&0xff00)>>8;
+		*c0=arr[rd]&0xff;
+		*a_out=(aa[rd]&0xff00)>>8;
+		*a_out0=(aa[rd]&0xff);
+		*b_out=(bb[rd]&0xff00)>>8;
+		*b_out0=(bb[rd]&0xff);
+		rd++;
+		rd=rd%10;
+	}
+}
+
 int main()
 {
 	unsigned int ans,ans0,a,a0,b,b0,t;
