@@ -106,7 +106,7 @@ void mul(unsigned char a,unsigned char a0, unsigned char b,unsigned char b0, uns
 
 int main()
 {
-	unsigned int ans,ans0,a,a0,b,b0,t;
+	unsigned char ans,ans0,a,a0,b,b0,t;
 	// int x = 0x4a;
 	// printf("%f\n",(b2d(x)));
 	// printf("%f\n",(b2d2(x<<4)));
@@ -123,7 +123,7 @@ int main()
 		b0 = rand()&0xff;
 		// printf("%x %x %x\n", aa, aa>>4, aa<<4);
 		add(a,a0,b,b0,&ans,&ans0,&t,&t,&t,&t,1);
-		printf("%d %d %d \n", (ans2<<4)|(ans>>4),aa,bb);
+		// printf("%d %d %d \n", (ans2<<4)|(ans>>4),a,bb);
 	}
 	
 	return 0;
